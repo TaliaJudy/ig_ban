@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>⚠️ Cytra Ban Account Software ⚠️</title>
+<style>
+  body {
+    background: #000;
+    color: #ff0000;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 2rem;
+  }
+  h1 {
+    font-size: 2.8rem;
+    text-shadow: 0 0 20px #ff0000;
+    letter-spacing: 2px;
+  }
+  p {
+    color: #ff5555;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+  }
+  input {
+    padding: 12px;
+    border: 2px solid #ff0000;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+    width: 80%;
+    max-width: 320px;
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+  button {
+    padding: 14px 28px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    background: #ff0000;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ff0000;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+  }
+  button:hover {
+    background: #ff5555;
+    box-shadow: 0 0 20px #ff5555;
+  }
+  .progress-container {
+    width: 80%;
+    max-width: 320px;
+    height: 20px;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1.5rem auto;
+    display: none;
+  }
+  .progress-bar {
+    height: 100%;
+    background: #ff0000;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+  .scare { display: none; }
+  video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+</style>
+</head>
+<body>
 
+<h1>⚠️ Cytra Ban Account Software ⚠️</h1>
+<p>This is an official tool by Cytra to permanently <strong>ban</strong> any Instagram account. Enter the username and click BAN ACCOUNT.</p>
+
+<form>
+  <input id="usernameInput" type="text" placeholder="Enter IG username to ban" required />
+  <br/>
+  <button id="banButton">BAN ACCOUNT 🔥</button>
+</form>
+
+<div class="progress-container" id="progressContainer">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<audio id="creepyAudio" src="creepy_sound.mp3" preload="auto"></audio>
+
+<div class="scare">
+  <video id="scareVideo" src="scare.mp4" loop></video>
+</div>
+
+<script>
+  const video = document.getElementById('scareVideo');
+  const scare = document.querySelector('.scare');
+  const usernameInput = document.getElementById('usernameInput');
+  const banButton = document.getElementById('banButton');
+  const progressContainer = document.getElementById('progressContainer');
+  const progressBar = document.getElementById('progressBar');
+  const creepyAudio = document.getElementById('creepyAudio');
+
+  banButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    const username = usernameInput.value.trim();
+    if (username === '') {
+      alert('Please enter a username to ban!');
+      return;
+    }
+
+    creepyAudio.play();
+    progressContainer.style.display = 'block';
+    progressBar.style.width = '0%';
+    let progress = 0;
+
+    const interval = setInterval(() => {
+      progress += Math.random() * 10;
+      if (progress >= 100) progress = 100;
+      progressBar.style.width = progress + '%';
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => triggerScare(), 500); // wait a bit before scare
+      }
+    }, 200);
+  });
+
+  function triggerScare() {
+    scare.style.display = 'block';
+    video.play();
+    goFullscreen();
+  }
+
+  function goFullscreen() {
+    const el = document.documentElement;
+    if (el.requestFullscreen) el.requestFullscreen();
+    else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    else if (el.msRequestFullscreen) el.msRequestFullscreen();
+  }
+
+  video.addEventListener('click', goFullscreen);
+</script>
+
+</body>
+</html>
